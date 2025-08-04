@@ -3,3 +3,4 @@ __pycache__/
 .env
 *.log
 *.txt
+golang/gemini-mcp-bash
