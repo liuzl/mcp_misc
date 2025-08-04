@@ -2,21 +2,12 @@
 # requires Python 3.13+
 import os
 import asyncio
-import logging
 from datetime import datetime
 from google import genai
 from google.genai import types
 from fastmcp import Client
 from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
-
-# Suppress all logging
-logging.getLogger().setLevel(logging.CRITICAL)
-logging.getLogger("google").setLevel(logging.CRITICAL)
-logging.getLogger("mcp").setLevel(logging.CRITICAL)
-logging.getLogger("fastmcp").setLevel(logging.CRITICAL)
-logging.getLogger("httpx").setLevel(logging.CRITICAL)
-logging.getLogger("httpcore").setLevel(logging.CRITICAL)
 
 # Create Gemini instance LLM class
 client = genai.Client(
