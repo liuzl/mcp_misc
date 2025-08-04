@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "shell": {
+      "transport": "streamable-http",
+      "url": "http://localhost:8080/mcp"
+    }
+  }
+}
