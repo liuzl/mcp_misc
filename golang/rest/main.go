@@ -35,6 +35,7 @@ type GeminiRequest struct {
 
 type Content struct {
 	Parts []Part `json:"parts"`
+	Role  string `json:"role,omitempty"`
 }
 
 type Part struct {
@@ -61,6 +62,7 @@ func main() {
 	fmt.Printf("%sType 'exit' to quit%s\n\n", ColorGray, ColorReset)
 
 	scanner := bufio.NewScanner(os.Stdin)
+	var conversation []Content
 	for {
 		fmt.Printf("%s%sYou: %s", ColorBold, ColorBlue, ColorReset)
 		if !scanner.Scan() {
@@ -76,15 +78,12 @@ func main() {
 		}
 		// Send message to Gemini
 		fmt.Printf("%s%sGemini: %s", ColorBold, ColorGreen, ColorReset)
-		reqBody := GeminiRequest{
-			Contents: []Content{
-				{
-					Parts: []Part{
-						{Text: userInput},
-					},
-				},
-			},
-		}
+
+		conversation = append(conversation, Content{
+			Parts: []Part{{Text: userInput}},
+			Role:  "user",
+		})
+		reqBody := GeminiRequest{Contents: conversation}
 		jsonData, err := json.Marshal(reqBody)
 		if err != nil {
 			fmt.Printf("%sError: %v%s\n", ColorRed, err, ColorReset)
@@ -125,6 +124,8 @@ func main() {
 					fmt.Printf("%s%s%s", ColorGreen, part.Text, ColorReset)
 				}
 			}
+			candidate.Content.Role = "model"
+			conversation = append(conversation, candidate.Content)
 		}
 		fmt.Println()
 	}
