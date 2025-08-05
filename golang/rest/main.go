@@ -56,7 +56,10 @@ func main() {
 	if baseURL == "" {
 		baseURL = "https://generativelanguage.googleapis.com"
 	}
-	model := "gemini-2.5-flash"
+	model := os.Getenv("GEMINI_MODEL")
+	if model == "" {
+		model = "gemini-2.5-flash"
+	}
 	url := fmt.Sprintf("%s/v1beta/models/%s:generateContent?key=%s", baseURL, model, apiKey)
 	fmt.Printf("%s%s🤖 Gemini MCP Agent Ready%s\n", ColorBold, ColorPurple, ColorReset)
 	fmt.Printf("%sType 'exit' to quit%s\n\n", ColorGray, ColorReset)
