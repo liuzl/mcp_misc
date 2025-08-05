@@ -1,11 +1,10 @@
 module gemini-mcp-bash
 
-go 1.23.0
-
-toolchain go1.24.4
+go 1.24.4
 
 require (
 	github.com/joho/godotenv v1.5.1
+	github.com/liuzl/ai v0.0.0-20250805015925-fdca73c1df67
 	github.com/modelcontextprotocol/go-sdk v0.2.0
 	google.golang.org/genai v0.1.0
 )
